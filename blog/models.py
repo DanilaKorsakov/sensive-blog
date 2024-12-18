@@ -6,7 +6,7 @@ from django.db.models import Count
 
 class TagQuerySet(models.QuerySet):
     def popular(self):
-        popular_tags = self.annotate(Count('posts')).order_by('-posts')
+        popular_tags = self.annotate(Count('posts'))
         return popular_tags
 
 

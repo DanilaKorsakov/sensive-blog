@@ -93,10 +93,7 @@ def post_detail(request, slug):
 
     most_popular_tags = Tag.objects.popular()[:5]
 
-    most_popular_posts = Post.objects.annotate(
-        likes_count=Count('likes', distinct=True),
-        comments_count=Count('comments', distinct=True),
-    )[:5]
+    most_popular_posts = []
 
     optimize_comment_count(most_popular_posts)
 
@@ -115,9 +112,7 @@ def tag_filter(request, tag_title):
 
     most_popular_tags = Tag.objects.popular()[:5]
 
-    most_popular_posts = Post.objects.annotate(likes_count=Count("likes")).order_by(
-        "-likes_count"
-    )[:5]
+    most_popular_posts = []
 
     optimize_comment_count(most_popular_posts)
 
