@@ -32,7 +32,7 @@ class PostQuerySet(models.QuerySet):
         return most_popular_posts
 
     def prefetch_author_tags(self):
-        return self.prefetch_related('author', Prefetch('tags', queryset=Tag.objects.fetch_posts_count()))
+        return self.select_related('author').prefetch_related(Prefetch('tags', queryset=Tag.objects.fetch_posts_count()))
 
 
 class Post(models.Model):
